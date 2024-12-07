@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# Bus stops interview task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Required environment
+`npm 8.11` and `node 16.15`
 
-Currently, two official plugins are available:
+## Installed packages ready to use
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.1",
+    "core-js": "^3.8.3",
+    "json-server": "^0.17.0",
+    "vitest": "^1.2.0",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`Font: Inter 400, 500, 600`
 
-## Expanding the ESLint configuration
+## Required open ports in environment
+`8080` - for the Vue application <br/>
+`3000` - for the API server
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## How to start environment
+1. `npm install` - install dependencies
+2. `npm run api` - run the API
+3. `npm run serve` - for the Vue application
 
-- Configure the top-level `parserOptions` property like this:
+## Assignment
+1. You have to implement simple board for bus stops according to the User Stories and corresponding designs
+2. Directory `docs` contains `openapi` specification for the `api` response - feel free to play with that to check how api was implemented. 
+3. Realization should be as close to the design as possible 
+4. Usage of Typescript is required 
+5. Handling of loading and error states 
+6. Unit tests
+7. Avoid using any other libraries
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## User stories
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. As a user I can open the url `http://localhost:8080` and see entry page with listed lines (https://www.figma.com/file/Dj4FdiwG7uYUqV8ml7xKSL/Interview-Task---Frontend-Dev?type=design&node-id=701-10332&mode=design&t=TTiUnvJpn1Nl7Rgh-4)
+   1. User can see title "Timetable"
+   2. User can see navigation with links "Bus Lines" and "Stops" ("Bus Lines" is active link)
+   3. User can see listed "Bus Lines". The "Bus Lines" should be sorted in the ascending order
+   4. User can see placeholder "Please select the bus line first"
+   5. User can click at the line
+      1. Placeholder for the "Bus Stops" disappears 
+      2. Placeholder "Please select the bus stop first" is displayed for the "Time" list
+      3. "Bus Stops" list is displayed (https://www.figma.com/file/Dj4FdiwG7uYUqV8ml7xKSL/Interview-Task---Frontend-Dev?type=design&node-id=701-27993&mode=design&t=TTiUnvJpn1Nl7Rgh-4)
+      4. "Bus Stops" should be sortable by clicking on the icon near the title (by field 'order')
+      5. By default, "Bus Stops" should be sorted in the ascending order
+   6. When line is selected, User can click at the stop
+      1. Placeholder for the "Time" list disappears
+      2. "Time" list is displayed (https://www.figma.com/file/Dj4FdiwG7uYUqV8ml7xKSL/Interview-Task---Frontend-Dev?type=design&node-id=701-36989&mode=design&t=TTiUnvJpn1Nl7Rgh-4)
+      3. "Time" list entries should be sorted in the ascending order
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. As a user I can open the url `http://localhost:8080/stops` and see "stops" page with listed stops (https://www.figma.com/file/Dj4FdiwG7uYUqV8ml7xKSL/Interview-Task---Frontend-Dev?type=design&node-id=701-38103&mode=design&t=TTiUnvJpn1Nl7Rgh-4)
+   1. User can see title "Timetable"
+   2. User can see navigation with links "Bus Lines" and "Stops" ("Stops" is active link)
+   3. User can see the search bar
+      1. If search bar is empty all stops should be visible
+      2. Once any search term is entered, "Bus Stops" list should be filtered (https://www.figma.com/file/Dj4FdiwG7uYUqV8ml7xKSL/Interview-Task---Frontend-Dev?type=design&node-id=701-40971&mode=design&t=TTiUnvJpn1Nl7Rgh-4)
+   4. User can see listed "Bus Stops". The "Bus Stops" should be sorted in the ascending order
+   5. "Bus Stops" should be sortable by clicking on the icon near the title
