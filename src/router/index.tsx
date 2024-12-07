@@ -1,11 +1,11 @@
 import { Route, Routes, BrowserRouter } from "react-router";
-import App from "../App";
+import HomePage from "../pages/home";
 import StopsPage from "../pages/stops";
 
 const Router = () => (
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/stops" element={<StopsPage />} />
         </Routes>
     </BrowserRouter>
