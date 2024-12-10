@@ -1,1 +1,10 @@
-// Components styles
+// LinesList
+.btn-line {
+  min-width: 54px;
+  font-size: 12px;
+  line-height: 16px;
+  &.active {
+    background-color: #2E3E6E;
+    border-color: #2E3E6E;
+  }
+}
