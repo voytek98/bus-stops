@@ -8,3 +8,15 @@
     border-color: #2E3E6E;
   }
 }
+
+// Navigation
+.bus-nav {
+  .nav-link {
+    border-bottom: 2px solid transparent;
+    color: $gray-600;
+    &.active {
+      color: $dark;
+      border-color: #1952E1;
+    }
+  }
+}

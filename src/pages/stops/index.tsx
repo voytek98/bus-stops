@@ -1,5 +1,3 @@
-const StopsPage = () => {
-    return <div>Stops page</div>
-}
-
-export default StopsPage;
+export const StopsPage = () => {
+  return <div>Stops page</div>;
+};
