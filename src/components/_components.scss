@@ -20,3 +20,20 @@
     }
   }
 }
+
+// PanelWithList
+.item-list {
+  max-height: 320px;
+}
+.item-listing {
+  &.clickable {
+    &:hover {
+        background-color: #F8F8FB;
+      }
+    &.active {
+      border-color: var(--bs-border-color);
+      background-color: #fff;
+      color: #1952E1;
+    }
+  }
+}
