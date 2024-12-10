@@ -37,3 +37,15 @@
     }
   }
 }
+
+.placeholder-box {
+  border: 2px dashed #ccc;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #999;
+  background-color: #fff;
+}
