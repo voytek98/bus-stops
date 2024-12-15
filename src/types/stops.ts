@@ -4,6 +4,7 @@ export type Stop = {
   order: number;
   time: string;
 };
+
 export type StopDetails = {
   stop: string;
   order: number;
