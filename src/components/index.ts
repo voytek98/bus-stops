@@ -3,3 +3,4 @@ export { Navigation } from './Navigation';
 export { PanelWithList } from './PanelWithList';
 export { StopsList } from './StopsList';
 export { StopsTimesList } from './StopsTimesList';
+export { SortButton } from './SortButton';

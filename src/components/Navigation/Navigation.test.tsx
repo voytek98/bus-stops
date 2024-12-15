@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Navigation } from './';
 import { MemoryRouter } from 'react-router';
+import { ROUTES } from '@app/router/routes';
 
 const navItems = [
-  { to: '/', label: 'Home' },
-  { to: '/stops', label: 'Stops' },
+  { to: ROUTES.HOME, label: 'Home' },
+  { to: ROUTES.STOPS, label: 'Stops' },
 ];
 
 const MockedNavigation = () => (
