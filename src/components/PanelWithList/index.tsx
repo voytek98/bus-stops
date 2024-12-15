@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 
-interface PanelWithListProps {
+export interface PanelWithListProps {
   title?: string;
   header: ReactNode;
   list: string[];
+  label: string;
   activeItem?: string;
   handleClick?: (item: string) => void;
 }
@@ -11,13 +12,14 @@ export const PanelWithList = ({
   title,
   header,
   list,
+  label,
   activeItem,
   handleClick,
 }: PanelWithListProps) => {
   const isClickable = typeof handleClick !== 'undefined';
 
   const getClassName = (isActive: boolean) =>
-    `item-listing list-group-item clickable px-4 ${isActive ? 'active' : ''}`;
+    `item-listing list-group-item clickable p-0 ${isActive ? 'active' : ''}`;
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLLIElement>,
@@ -36,19 +38,26 @@ export const PanelWithList = ({
       <div className="d-flex gap-1 align-items-center p-4 border-bottom">
         {header}
       </div>
-      <ul className="item-list list-group list-group-flush overflow-y-auto">
+      <ul
+        className="item-list list-group list-group-flush overflow-y-auto"
+        aria-label={label}
+      >
         {list.map((item) =>
           isClickable ? (
             <li
               key={item}
-              role="button"
               tabIndex={0}
               className={getClassName(activeItem === item)}
               aria-label={item}
               onClick={() => handleClick(item)}
               onKeyDown={(e) => handleKeyDown(e, item)}
             >
-              {item}
+              <button
+                className="p-0 border-0 bg-transparent d-flex w-100 h-100 px-4 py-2"
+                tabIndex={-1}
+              >
+                {item}
+              </button>
             </li>
           ) : (
             <li key={item} className="item-listing list-group-item px-4">

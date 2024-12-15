@@ -28,12 +28,14 @@
 .item-listing {
   &.clickable {
     &:hover {
-        background-color: #F8F8FB;
-      }
+      background-color: #F8F8FB;
+    }
     &.active {
-      border-color: var(--bs-border-color);
       background-color: #fff;
-      color: #1952E1;
+      border-color: var(--bs-border-color);
+      & button {
+        color: #1952E1;
+      }
     }
   }
 }
