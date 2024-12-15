@@ -5,10 +5,10 @@ type NavItemType = {
   label: string;
 };
 
-interface NaviagionProps {
+interface NavigationProps {
   items: NavItemType[];
 }
-export const Navigation = ({ items }: NaviagionProps) => {
+export const Navigation = ({ items }: NavigationProps) => {
   return (
     <nav className="bus-nav bg-white">
       <ul className="d-flex mb-0 list-unstyled" role="tablist">
