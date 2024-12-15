@@ -23,20 +23,26 @@ export const StopsList = () => {
   };
 
   if (isEmpty)
-    return <div className="placeholder-box">Please select the bus line first</div>;
+    return (
+      <div aria-label="stops-list-placeholder" className="placeholder-box">
+        Please select the bus line first
+      </div>
+    );
 
   return (
     <PanelWithList
+      label="stops-list"
       title={`Bus Line: ${activeLine}`}
       header={
         <>
           <span className="fs-6">Bus Stops</span>
-          <img
-            role="button"
-            style={{ rotate: rotateDeg }}
-            src={arrowBottom}
+          <button
+            aria-label="sort"
+            className="p-0 border-0 bg-transparent d-flex"
             onClick={handleClick}
-          />
+          >
+            <img style={{ rotate: rotateDeg }} src={arrowBottom} />
+          </button>
         </>
       }
       list={sortedList.map((item) => item.stop)}
