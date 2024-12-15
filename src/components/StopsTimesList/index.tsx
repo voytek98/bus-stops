@@ -8,7 +8,7 @@ export const StopsTimesList = () => {
 
   if (!activeStop)
     return (
-      <div className="placeholder-box">
+      <div aria-label="times-list-placeholder" className="placeholder-box">
         Please select the bus {itemToSelect} first
       </div>
     );
@@ -17,6 +17,7 @@ export const StopsTimesList = () => {
     <PanelWithList
       title={`Bus Stop: ${activeStop}`}
       header={<span>Time</span>}
+      label="times-list"
       list={timeList}
     />
   );
