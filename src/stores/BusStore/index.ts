@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create, StateCreator } from 'zustand';
 import { fetchStops } from '@app/api';
 import { BusData, Stop } from '@app/types';
 
@@ -7,7 +7,7 @@ interface BusState {
   busData: BusData;
   activeLine: number;
   activeStop: string;
-  getActiveStopList: () => { stop: string; order: number; }[];
+  getActiveStopList: () => { stop: string; order: number }[];
   getTimeList: (stop: string) => string[];
   // Data fetch
   isLoading: boolean;
@@ -16,7 +16,7 @@ interface BusState {
   fetchData: () => Promise<void>;
 }
 
-export const useBusStore = create<BusState>((set, get) => ({
+export const busStoreCreator: StateCreator<BusState> = (set, get) => ({
   stopList: [],
   busData: new Map(),
   activeLine: 0,
@@ -49,4 +49,7 @@ export const useBusStore = create<BusState>((set, get) => ({
       set({ error: (error as Error).message, isLoading: false });
     }
   },
-}));
+});
+
+export const useBusStore = create<BusState>()(busStoreCreator);
+
