@@ -1,21 +1,22 @@
-import { useBusStore } from '@app/stores';
 import { useState } from 'react';
-import arrowBottom from '@app/assets/icons/arrow-bottom-rec.svg';
-import { PanelWithList } from '@app/components';
+import { PanelWithList, SortButton } from '@app/components';
+import { useBusStore } from '@app/stores';
+import { SortDirection } from '@app/types';
 
 export const StopsList = () => {
   const { getActiveStopList, activeLine, activeStop } = useBusStore();
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    SortDirection.ASC
+  );
   const activeStopList = getActiveStopList();
 
   const isEmpty = !activeLine || activeLine < 1;
   const sortedList = activeStopList.sort((a, b) =>
     sortDirection === 'asc' ? a.order - b.order : b.order - a.order
   );
-  const rotateDeg = sortDirection === 'asc' ? '180deg' : '0deg';
 
-  const handleClick = () => {
-    setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+  const handleClick = (dir: SortDirection) => {
+    setSortDirection(dir);
   };
 
   const handleBusStopClick = (stop: string) => {
@@ -34,16 +35,11 @@ export const StopsList = () => {
       label="stops-list"
       title={`Bus Line: ${activeLine}`}
       header={
-        <>
-          <span className="fs-6">Bus Stops</span>
-          <button
-            aria-label="sort"
-            className="p-0 border-0 bg-transparent d-flex"
-            onClick={handleClick}
-          >
-            <img style={{ rotate: rotateDeg }} src={arrowBottom} />
-          </button>
-        </>
+        <SortButton
+          title="Bus Stops"
+          sortDirection={sortDirection}
+          handleClick={handleClick}
+        />
       }
       list={sortedList.map((item) => item.stop)}
       activeItem={activeStop}

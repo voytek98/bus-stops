@@ -51,6 +51,14 @@ describe('StopsPage', () => {
       expect(screen.getByLabelText('sort')).toBeInTheDocument();
       expect(stops).toEqual(sortedStops);
     });
+
+    it('renders the page in loading state', () => {
+      render(<StopsPage />);
+      const input = screen.getByPlaceholderText('Search...');
+
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(input).toBeDisabled();
+    });
   });
 
   describe('when using search functionality', () => {

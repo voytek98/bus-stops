@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Mock } from 'vitest';
 import { StopsList } from './';
 import { useBusStore } from '@app/stores';
@@ -35,7 +35,9 @@ describe('StopsList', () => {
 
   it('should render the bus stops list', async () => {
     await setupStore();
-    useBusStore.setState({ activeLine: data[0].line });
+    act(() => {
+      useBusStore.setState({ activeLine: data[0].line });
+    });
     render(<StopsList />);
 
     expect(screen.getByText(`Bus Line: ${data[0].line}`)).toBeInTheDocument();
@@ -46,7 +48,9 @@ describe('StopsList', () => {
 
   it('should set active stop when a stop is clicked', async () => {
     const result = await setupStore();
-    useBusStore.setState({ activeLine: data[0].line });
+    act(() => {
+      useBusStore.setState({ activeLine: data[0].line });
+    });
     render(<StopsList />);
 
     const stopButton = screen.getByRole('listitem', { name: data[0].stop });
@@ -62,7 +66,9 @@ describe('StopsList', () => {
 
   it('should sort the list when a sort button is clicked', async () => {
     await setupStore();
-    useBusStore.setState({ activeLine: data[0].line });
+    act(() => {
+      useBusStore.setState({ activeLine: data[0].line });
+    });
     render(<StopsList />);
 
     const sortButton = screen.getByRole('button', { name: 'sort' });

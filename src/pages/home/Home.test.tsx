@@ -47,6 +47,12 @@ describe('Home page', () => {
         screen.getByLabelText('times-list-placeholder')
       ).toBeInTheDocument();
     });
+
+    it('should render page in loading state', async () => {
+      render(<HomePage />);
+
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
   });
 
   describe('when user interacts', () => {

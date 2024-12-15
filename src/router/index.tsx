@@ -1,13 +1,14 @@
 import { Route, Routes, BrowserRouter } from 'react-router';
 import { HomePage, StopsPage } from '@app/pages';
-import { MainLayout } from "@app/layouts";
+import { MainLayout } from '@app/layouts';
+import { ROUTES } from './routes';
 
 const Router = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path={ROUTES.HOME} element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="/stops" element={<StopsPage />} />
+        <Route path={ROUTES.STOPS} element={<StopsPage />} />
       </Route>
     </Routes>
   </BrowserRouter>

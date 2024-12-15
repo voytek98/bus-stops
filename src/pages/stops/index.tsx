@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useBusStore } from '@app/stores';
-import { PanelWithList } from '@app/components';
+import { PanelWithList, SortButton } from '@app/components';
 import { useDebounce } from '@app/hooks';
-import arrowBottom from '@app/assets/icons/arrow-bottom-rec.svg';
+import { SortDirection } from '@app/types';
 
 const StopsPage = () => {
-  const { stopList } = useBusStore();
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const { stopList, isLoading, isLoaded } = useBusStore();
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    SortDirection.ASC
+  );
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
-  const rotateDeg = sortDirection === 'asc' ? '180deg' : '0deg';
+
   const sortedList = stopList.sort((a, b) =>
     sortDirection === 'asc'
       ? a.stop.localeCompare(b.stop)
@@ -18,8 +20,8 @@ const StopsPage = () => {
   const filteredList = sortedList.filter((stop) =>
     stop.stop.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
-  const handleClick = () => {
-    setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+  const handleClick = (dir: SortDirection) => {
+    setSortDirection(dir);
   };
 
   return (
@@ -32,28 +34,28 @@ const StopsPage = () => {
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-sm"
             placeholder="Search..."
+            disabled={isLoading || !isLoaded}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
       <div className="col-12">
-        <PanelWithList
-          header={
-            <>
-              <span className="fs-6">Bus Stops</span>
-              <button
-                aria-label="sort"
-                className="p-0 border-0 bg-transparent d-flex"
-                onClick={handleClick}
-              >
-                <img style={{ rotate: rotateDeg }} src={arrowBottom} />
-              </button>
-            </>
-          }
-          label='stops-list'
-          list={filteredList.map((stop) => stop.stop)}
-        />
+        {isLoading || !isLoaded ? (
+          <div className="p-4">Loading...</div>
+        ) : (
+          <PanelWithList
+            header={
+              <SortButton
+                title="Bus Stops"
+                sortDirection={sortDirection}
+                handleClick={handleClick}
+              />
+            }
+            label="stops-list"
+            list={filteredList.map((stop) => stop.stop)}
+          />
+        )}
       </div>
     </div>
   );
