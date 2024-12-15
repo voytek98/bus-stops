@@ -42,14 +42,16 @@ const StopsPage = () => {
           header={
             <>
               <span className="fs-6">Bus Stops</span>
-              <img
-                role="button"
-                style={{ rotate: rotateDeg }}
-                src={arrowBottom}
+              <button
+                aria-label="sort"
+                className="p-0 border-0 bg-transparent d-flex"
                 onClick={handleClick}
-              />
+              >
+                <img style={{ rotate: rotateDeg }} src={arrowBottom} />
+              </button>
             </>
           }
+          label='stops-list'
           list={filteredList.map((stop) => stop.stop)}
         />
       </div>
